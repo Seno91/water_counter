@@ -1,5 +1,5 @@
 name: water_counter
-description: "Eine kleine Flutter-App, die die Verwendung von SharedPreferences zu zeigen."
+description: "Eine kleine Flutter-App, um die Verwendung von SharedPreferences zu zeigen."
 publish_to: 'none'
 version: 0.1.0
 
