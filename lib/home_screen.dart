@@ -26,32 +26,23 @@ class _HomescreenState extends State<Homescreen> {
     });
   }
 
-  void _saveCounter() async {
-    await prefs.setInt("counter", _counter);
-  }
-
-  void _incrementCounter() {
+  void _incrementCounter() async {
     setState(() {
       _counter++;
     });
-    _saveCounter();
+    await prefs.setInt("counter", _counter);
   }
 
-  void _decrementCounter() {
-    setState(() {
-      _counter--;
-      if (_counter < 0) {
-        _counter = 0;
-      }
-    });
-    _saveCounter();
-  }
+  // TODO: This should be implemented.
+  // ignore: unused_element
+  void _decrementCounter() {}
 
-  void _resetCounter() {
+  void _resetCounter() async {
     setState(() {
       _counter = 0;
     });
-    _saveCounter();
+
+    await prefs.setInt("counter", _counter);
   }
 
   @override
@@ -82,7 +73,8 @@ class _HomescreenState extends State<Homescreen> {
             Padding(
               padding: EdgeInsets.only(left: 32.0, right: 32.0),
               child: WCButton(
-                onPressed: _decrementCounter,
+                // TODO: Missing function to remove a drink (_decrementCounter).
+                onPressed: null,
                 text: "Getränk entfernen",
               ),
             ),
@@ -104,7 +96,7 @@ class _HomescreenState extends State<Homescreen> {
 class WCButton extends StatelessWidget {
   const WCButton({super.key, required this.onPressed, required this.text});
 
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final String text;
 
   @override
