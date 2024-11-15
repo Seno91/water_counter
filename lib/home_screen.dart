@@ -58,6 +58,7 @@ class _HomescreenState extends State<Homescreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 8.0,
         title: const Text("WaterCounter"),
       ),
       body: Center(
@@ -69,29 +70,58 @@ class _HomescreenState extends State<Homescreen> {
               "$_counter",
               style: Theme.of(context).textTheme.displayLarge,
             ),
-            const SizedBox(height: 20),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: _incrementCounter,
-                  child: const Text("Trinken"),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: _decrementCounter,
-                  child: const Text("Getränk entfernen"),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  onPressed: _resetCounter,
-                  child: const Text("Zähler zurücksetzen"),
-                )
-              ],
+            const SizedBox(height: 64),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  WCButton(
+                    onPressed: _incrementCounter,
+                    text: "Trinken",
+                  ),
+                  const SizedBox(height: 16),
+                  WCButton(
+                    onPressed: _decrementCounter,
+                    text: "Getränk entfernen",
+                  ),
+                  const SizedBox(height: 16),
+                  WCButton(
+                    onPressed: _resetCounter,
+                    text: "Zähler zurücksetzen",
+                  )
+                ],
+              ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class WCButton extends StatelessWidget {
+  const WCButton({super.key, required this.onPressed, required this.text});
+
+  final VoidCallback onPressed;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.blue,
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(4),
+          ),
+        ),
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: TextStyle(color: Colors.white),
         ),
       ),
     );
