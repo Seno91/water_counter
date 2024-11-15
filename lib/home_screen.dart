@@ -72,25 +72,26 @@ class _HomescreenState extends State<Homescreen> {
             ),
             const SizedBox(height: 64),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  WCButton(
-                    onPressed: _incrementCounter,
-                    text: "Trinken",
-                  ),
-                  const SizedBox(height: 16),
-                  WCButton(
-                    onPressed: _decrementCounter,
-                    text: "Getränk entfernen",
-                  ),
-                  const SizedBox(height: 16),
-                  WCButton(
-                    onPressed: _resetCounter,
-                    text: "Zähler zurücksetzen",
-                  )
-                ],
+              padding: EdgeInsets.only(left: 32.0, right: 32.0),
+              child: WCButton(
+                onPressed: _incrementCounter,
+                text: "Trinken",
+              ),
+            ),
+            const SizedBox(height: 16),
+            Padding(
+              padding: EdgeInsets.only(left: 32.0, right: 32.0),
+              child: WCButton(
+                onPressed: _decrementCounter,
+                text: "Getränk entfernen",
+              ),
+            ),
+            const SizedBox(height: 16),
+            Padding(
+              padding: EdgeInsets.only(left: 32.0, right: 32.0),
+              child: WCButton(
+                onPressed: _resetCounter,
+                text: "Zähler zurücksetzen",
               ),
             ),
           ],
@@ -108,6 +109,7 @@ class WCButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Make Button as wide as it can be.
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
