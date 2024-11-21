@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:water_counter/database_repository.dart';
+import 'package:water_counter/mock_database.dart';
+import 'package:water_counter/water_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
+  HomeScreen({super.key});
+  final DatabaseRepository repository = MockDatabase();
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final SharedPreferencesAsync prefs = SharedPreferencesAsync();
-
   int _counter = 0;
 
   @override
@@ -19,26 +19,21 @@ class _HomeScreenState extends State<HomeScreen> {
     _loadCounter();
   }
 
-  void _saveCounter() async {
-    await prefs.setInt("counter", _counter);
-  }
-
   void _loadCounter() async {
-    final rememberedCounter = await prefs.getInt("counter") ?? 0;
+    final rememberedCounter = await widget.repository.loadCounter();
     setState(() {
       _counter = rememberedCounter;
     });
   }
 
   void _incrementCounter() async {
+    await widget.repository.incrementCounter();
+
     setState(() {
       _counter++;
     });
-    _saveCounter();
   }
 
-  // TODO: This should be implemented.
-  // ignore: unused_element
   void _decrementCounter() {
     setState(() {
       _counter--;
@@ -49,7 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _counter = 0;
     });
-    _saveCounter();
   }
 
   @override
@@ -58,6 +52,12 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         elevation: 8.0,
         title: const Text("WaterCounter"),
+      ),
+      body: WaterScreen(
+        counter: _counter,
+        incrementCounter: _incrementCounter,
+        resetCounter: _resetCounter,
+        decrementCounter: _decrementCounter,
       ),
     );
   }
