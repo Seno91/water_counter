@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:water_counter/repositories/database_repository.dart';
-import 'package:water_counter/repositories/mock_database.dart';
+import 'package:water_counter/repositories/shared_preferences.dart';
 import 'package:water_counter/water_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
-  final DatabaseRepository repository = MockDatabase();
+  final DatabaseRepository repository = SharedPreferences();
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
